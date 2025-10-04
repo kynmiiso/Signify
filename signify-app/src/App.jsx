@@ -3,7 +3,8 @@ import './App.css'
 import PracticeButton from "./PracticeButton.jsx"
 import LearnButton from './LearnButton.jsx'
 import TranslateButton from './TranslateButton.jsx'
-import SignifyLogo from './assets/logo.jpg';
+import SignifyLogo from './assets/logo.png';
+import Cam from './Cam.jsx'
 
 function App() {
 
@@ -11,7 +12,8 @@ function App() {
     <>
       <img src={SignifyLogo} alt="Logo" />
       <h1>Signify</h1>
-      <div className="card">
+      <div className="card text-3xl font-bold underline">
+        <Cam></Cam>
         <LearnButton></LearnButton>
         <PracticeButton></PracticeButton>
         <TranslateButton></TranslateButton>
