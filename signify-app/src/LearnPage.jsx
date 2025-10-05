@@ -51,7 +51,7 @@ export default function LearnPage() {
                 )}
                 {win && (
                     <div className="my-4 p-6 bg-green-500 rounded shadow text-3xl font-bold text-white">
-                    You Win!
+                    You passed!
                     </div>
                 )}
                 <button

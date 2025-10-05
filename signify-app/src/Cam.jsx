@@ -10,7 +10,7 @@ export default function Cam({ onDetect }) {
                     onDetect(data.prediction.toLowerCase());
                 }
             } catch (e) {
-
+                
             }
         }, 1000);
 
