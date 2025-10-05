@@ -2,8 +2,3 @@ Signify is an innovative app that allows us to bridge the communication gap face
 
 **Learn**
 Signify allows users to learn American Sign Language (ASL) through a gamified learning platform. A flashcard of a word from the Sign Dictionary is displayed on-screen and the user must make the sign correctly in a limited amount of time to win. 
-
-**Translate**
-Signify has two translate modes:
-1. Sign to Text for 
-2. Speech to Text. and displays text translations in real-time with closed captioning to bridge the communication gap. 
