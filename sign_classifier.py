@@ -2,7 +2,7 @@ import mediapipe as mp
 import cv2
 import pickle
 import numpy as np
-from flask import Flask, Response
+from flask import Flask, Response, jsonify
 
 model_dict = pickle.load(open('./model.pickle', 'rb'))
 model = model_dict['model']
@@ -16,7 +16,10 @@ hands = mp_hands.Hands(static_image_mode=True, min_detection_confidence=0.3)
 app = Flask(__name__)
 cap = cv2.VideoCapture(0)
 
+current_prediction = "" 
+
 def generate_frames():
+    global current_prediction
     while True: 
         success, frame = cap.read()
         if not success:
@@ -59,6 +62,7 @@ def generate_frames():
                 y2 = int(max(y_coords) * height)
 
                 prediction = model.predict([np.asarray(frame_data)])[0]
+                current_prediction = prediction
 
                 cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 0, 0), 4)
                 cv2.putText(frame, prediction, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 1.3, (0, 0, 0), 3, cv2.LINE_AA)
@@ -71,6 +75,11 @@ def generate_frames():
 @app.route('/video')
 def video():
     return Response(generate_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+@app.route('/prediction')
+def prediction():
+    global current_prediction
+    return jsonify({'prediction': current_prediction})
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
