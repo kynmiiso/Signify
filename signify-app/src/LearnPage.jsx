@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import Cam from './Cam';
 import { useState } from 'react';
 
@@ -10,7 +9,6 @@ const signList = Object.keys(images).map((path) => {
 });
 
 export default function LearnPage() {
-    const navigate = useNavigate();
     const [flashCard, setFlashCard] = useState(null);
     const [win, setWin] = useState(false);
     const [lastDetected, setLastDetected] = useState("");
@@ -29,43 +27,28 @@ export default function LearnPage() {
     };
 
     return (
-        <>
-            <Cam onDetect={handleDetect}></Cam>
-            <div className="center-content">
-                <button
-                    className="w-full py-5 bg-green-500 hover:bg-green-600 text-2xl text-white font-bold rounded my-3"
-                    onClick={play}
-                >
-                    Play
-                </button>
-
-                <div className="my-2 text-lg text-black bg-white rounded p-2">
-                Detected: {lastDetected || "None"}<br />
-                FlashCard: {flashCard ? flashCard.name : "None"}
+        <>  
+            <div className='flex flex-row gap-4 items-center'>
+                <div className='flex-1 my-4'>                
+                    <Cam onDetect={handleDetect}></Cam>
                 </div>
-                {flashCard && (
-                    <div className="my-4 p-6 bg-green-500 rounded shadow text-3xl font-bold text-white">
-                        <div>Flash card: {flashCard.name}</div>
-                        <img src={flashCard.src} alt={flashCard.name} />
-                    </div>
-                )}
-                {win && (
-                    <div className="my-4 p-6 bg-green-500 rounded shadow text-3xl font-bold text-white">
-                    You passed!
-                    </div>
-                )}
-                <button
-                    className="w-full py-5 bg-blue-400 border-3 border-transparent hover:bg-blue-500 hover:border-blue-300 text-2xl text-white font-bold rounded my-3 grid"
-                    onClick={() => navigate('/translate')}
-                >
-                    Translate
-                </button>
-                <button
-                    className="w-full py-5 bg-blue-400 border-3 border-transparent hover:bg-blue-500 hover:border-blue-300 text-2xl text-white font-bold rounded my-3 grid"
-                    onClick={() => navigate('/')}
-                >
-                    Home Page
-                </button>
+                <div className="center-content">
+                    <button
+                        className="w-full py-5 bg-rose-300 border-3 border-transparent hover:bg-pink-300 hover:border-pink-200 text-2xl text-white font-bold rounded-full my-3 grid"
+                        onClick={play}
+                    >
+                        Play
+                    </button>
+
+                    {flashCard && (
+                        <div className="my-4 p-6 bg-pink-300 rounded shadow text-3xl font-bold text-white">
+                            <div className='mb-5'>Flash card: {flashCard.name}</div>
+                            <img src={flashCard.src} alt={flashCard.name} />
+                            <div className='mt-5'>Detected: {lastDetected || "None"}<br /></div>
+                            {win && (<div>You win!</div>)}
+                        </div>
+                    )}
+                </div>
             </div>
         </>
   );
